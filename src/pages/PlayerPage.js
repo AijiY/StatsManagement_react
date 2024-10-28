@@ -3,6 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { getSeasons, getCurrentSeason, getPlayer, getPlayerCareerStats, getPlayerSeasonStats} from '../apis/GetMappings';
 import { getGameResult, getClub } from './../apis/GetMappings';
 
+import goalsIcon from '../assets/images/goals.png';
+import assistsIcon from '../assets/images/assists.png';
+import minutesIcon from '../assets/images/minutes.png';
+import yellowCardsIcon from '../assets/images/yellow-cards.png';
+import redCardsIcon from '../assets/images/red-cards.png';
+
+
 function PlayerPage() {
     const apiUrl = process.env.REACT_APP_API_URL;
     
@@ -64,18 +71,25 @@ function PlayerPage() {
             <br />
             {/* クラブページに戻るリンク */}
             <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubId}/players`}>Back to Players</Link>
-            {/* 選手名 */}
-            {player && <h1>{player.name}</h1>}
+
+            <br /><br />            
 
             {/* シーズン成績と通算成績の表示切り替えボタン */}
-            <button onClick={() => setIsSeasonStatsView(!isSeasonStatsView)}>
-                {isSeasonStatsView ? 'Show Career Stats' : 'Show Season Stats'}
-            </button>
+            <div className='button-container'>
+                <button onClick={() => setIsSeasonStatsView(!isSeasonStatsView)} disabled={isSeasonStatsView}>
+                    Show Season Stats
+                </button>
+                <button onClick={() => setIsSeasonStatsView(!isSeasonStatsView)} disabled={!isSeasonStatsView}>
+                    Show Career Stats
+                </button>
+            </div>
 
             {/* シーズン成績 */}
             
             {isSeasonStatsView && (
                 <div>
+                    {/* 選手名 */}
+                    {player && <h1>{player.name} Season Stats</h1>}
                     {/* シーズン選択リスト */}
                     <lable htmlFor="season">Season:</lable>
                     <select id="season" value={selectedSeason?.id || ''} onChange={handleSeasonChange}>
@@ -90,19 +104,30 @@ function PlayerPage() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Games</th>
-                                <th>Goals</th>
-                                <th>Assists</th>
-                                <th>Yellow Cards</th>
-                                <th>Red Cards</th>
+                                <th rowSpan="2">Club</th>
+                                <th colSpan="3">Games</th>
+                                <th rowSpan="2"><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
+                            </tr>
+                            <tr>
+                                <th>Total</th>  
+                                <th>Start</th>  
+                                <th>Sub</th>    
                             </tr>
                         </thead>
                         {playerSeasonStats.map((seasonStat) => (
                             <tbody key={seasonStat.seasonId}>
                                 <tr>
+                                    <td className='text'>{seasonStat.clubName}</td>
                                     <td>{seasonStat.games}</td>
+                                    <td>{seasonStat.starterGames}</td>
+                                    <td>{seasonStat.substituteGames}</td>
                                     <td>{seasonStat.goals}</td>
                                     <td>{seasonStat.assists}</td>
+                                    <td>{seasonStat.minutes}</td>
                                     <td>{seasonStat.yellowCards}</td>
                                     <td>{seasonStat.redCards}</td>
                                 </tr>
@@ -116,12 +141,15 @@ function PlayerPage() {
                         <thead>
                             <tr>
                                 <th>Date</th>
+                                <th>Club</th>
                                 <th>Opponent</th>
                                 <th>Score</th>
-                                <th>Goals</th>
-                                <th>Assists</th>
-                                <th>Yellow Cards</th>
-                                <th>Red Cards</th>
+                                <th>Starter</th>
+                                <th><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
+                                <th><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
+                                <th><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
+                                <th><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
+                                <th><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,10 +157,13 @@ function PlayerPage() {
                                 seasonStat.playerGameStats.map((gameStat) => (
                                     <tr key={gameStat.gameId}>
                                         <td>{gameStat.gameDate}</td>
-                                        <td>{gameStat.opponentClubName}</td>
-                                        <td>{gameStat.score}</td>
+                                        <td className='text'>{seasonStat.clubName}</td>
+                                        <td className='text'>{gameStat.opponentClubName}</td>
+                                        <td className='score-text'>{gameStat.score}</td>
+                                        <td className='num'>{gameStat.isStarter ? '〇' : '-'}</td>
                                         <td>{gameStat.goals}</td>
                                         <td>{gameStat.assists}</td>
+                                        <td>{gameStat.minutes}</td>
                                         <td>{gameStat.yellowCards}</td>
                                         <td>{gameStat.redCards}</td>
                                     </tr>
@@ -147,17 +178,24 @@ function PlayerPage() {
             {/* 通算成績 */}
             {!isSeasonStatsView && (
                 <div>
-                    <h2>Career Stats</h2>
+                    {/* 選手名 */}
+                    {player && <h1>{player.name} Career Stats</h1>}
                     <table>
                         <thead>
                             <tr>
-                                <th>Season</th>
-                                <th>Clubs</th>
-                                <th>Games</th>
-                                <th>Goals</th>
-                                <th>Assists</th>
-                                <th>Yellow Cards</th>
-                                <th>Red Cards</th>
+                                <th rowSpan="2">Season</th>
+                                <th rowSpan="2">Club</th>
+                                <th colSpan="3">Games</th>
+                                <th rowSpan="2"><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
+                                <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
+                            </tr>
+                            <tr>
+                                <th>Total</th>  
+                                <th>Start</th>  
+                                <th>Sub</th>    
                             </tr>
                         </thead>
                         <tbody>
@@ -166,8 +204,11 @@ function PlayerPage() {
                                     <td>{playerSeasonStat.seasonName}</td>
                                     <td>{playerSeasonStat.clubName}</td>
                                     <td>{playerSeasonStat.games}</td>
+                                    <td>{playerSeasonStat.starterGames}</td>
+                                    <td>{playerSeasonStat.substituteGames}</td>
                                     <td>{playerSeasonStat.goals}</td>
                                     <td>{playerSeasonStat.assists}</td>
+                                    <td>{playerSeasonStat.minutes}</td>
                                     <td>{playerSeasonStat.yellowCards}</td>
                                     <td>{playerSeasonStat.redCards}</td>
                                 </tr>

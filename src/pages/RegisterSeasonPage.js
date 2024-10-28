@@ -57,7 +57,7 @@ function RegisterSeasonPage() {
                 setNewSeasonName(''); // 入力欄をリセット
                 setNewStartDate(''); // 入力欄をリセット
                 setNewEndDate(''); // 入力欄をリセット
-                showToast(`Season '${newSeason.name}' registered successfully!`);
+                showToast(`'${newSeason.name}'シーズンが登録されました`, 'success');
 
                 // 新しいシーズンが登録された後、現在のシーズンを再度更新
                 setCurrentSeason(newSeason); // 直接新しいシーズンで更新
@@ -75,33 +75,35 @@ function RegisterSeasonPage() {
             <br />
             {/* 現在のシーズン名を表示 */}
             {currentSeason && <p>Current Season: {currentSeason.name}</p>}
-            <h1>Register Season</h1>
+            <h1>Register New Season</h1>
             <form onSubmit={handleForSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Season name like yyyy-yy"
-                    value={newSeasonName}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="date"
-                    name="startDate"
-                    placeholder="Start Date"
-                    value={newStartDate}
-                    onChange={handleInputChange}
-                    required
-                />
-                <input
-                    type="date"
-                    name="endDate"
-                    placeholder="End Date"
-                    value={newEndDate}
-                    onChange={handleInputChange}
-                    required
-                />
-                <button type="submit">Register</button>
+                {/* <div style={{ display: 'flex', gap: '10px' }}> */}
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Season name like yyyy-yy"
+                        value={newSeasonName}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <input
+                        type="date"
+                        name="startDate"
+                        placeholder="Start Date"
+                        value={newStartDate}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <input
+                        type="date"
+                        name="endDate"
+                        placeholder="End Date"
+                        value={newEndDate}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <button type="submit">Register</button>
+                {/* </div> */}
             </form>
         </div>
     );

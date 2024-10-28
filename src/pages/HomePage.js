@@ -4,10 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 function HomePage() {
     return (
         <div>
+            <h1>Football Stats Management System</h1>
+
             {/* CountriesPageへのリンク */}
-            <Link to="/countries">データ管理</Link>
+            <Link to="/countries">Data Management</Link>
             <br />
-            <Link to="/register-season">新シーズン登録</Link>
+            <Link to="/register-season">Register New Season</Link>
         </div>
     );
 }
