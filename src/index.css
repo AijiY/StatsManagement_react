@@ -11,3 +11,111 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ---------- 以下自分で作成 ---------- */
+/* 全体の周囲に余白を追加 */
+body {
+  margin: 20px;
+}
+
+/* 表の基本スタイル */
+table {
+  border-collapse: collapse; /* セルの境界線を一つにする */
+}
+
+table, th, td {
+  border: 1px solid black; /* 表の線を引く */
+}
+
+th {
+  text-align: center; /* th要素の中身を中央揃え */
+}
+
+
+td {
+  text-align: right; /* td要素の中身を右寄せ（成績関連の数値が多いため） */
+}
+
+.text {
+  text-align: left; /* テキストは基本は左寄せ */
+}
+
+.score-text {
+  text-align: center; /* 成績のテキストは中央寄せ */
+  min-width: 50px; 
+}
+
+.num {
+  text-align: center; /* 背番号、順位等は中央揃え */
+}
+
+.icon {
+  width: 20px; /* アイコン画像の幅を固定 */
+  height: 20px; /* アイコン画像の高さを固定 */
+}
+
+.icon-large {
+  width: 30px; /* アイコン画像の幅を固定 */
+  height: 30px; /* アイコン画像の高さを固定 */
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* ClubsPageのGameResults用のスタイル */
+.home {
+  min-width: 250px; /* チーム名の幅を固定 */
+  text-align: right; /* チーム名は右寄せ */
+  padding-right: 10px;
+}
+
+.away {
+  min-width: 250px; /* チーム名の幅を固定 */
+  text-align: left; /* チーム名は左寄せ */
+  padding-left: 10px;
+}
+
+/* RegisterGameResultPage用のスタイル */
+#game-info-container {
+  font-size: large;
+
+  select, input, button {
+    font-size: inherit;
+}
+}
+
+
+#stats-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#club-info-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.each-club-info-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.stats-input {
+  width: 30px;
+}
+
+.minutes-input {
+  width: 50px;
+}
+
+

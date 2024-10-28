@@ -3,6 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useToast } from '../contexts/ToastContext';
 import { getClub, getCurrentSeason, getPlayersByClub, getPlayersSeasonStatsByClub } from '../apis/GetMappings.js';
 
+import goalsIcon from '../assets/images/goals.png';
+import assistsIcon from '../assets/images/assists.png';
+import minutesIcon from '../assets/images/minutes.png';
+import yellowCardsIcon from '../assets/images/yellow-cards.png';
+import redCardsIcon from '../assets/images/red-cards.png';
+
 function PlayersPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
   
@@ -100,23 +106,38 @@ function PlayersPage() {
       <table>
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Name</th>
-            <th>Games</th>
-            <th>Goals</th>
+              <th rowSpan="2">No.</th>   
+              <th rowSpan="2">Name</th>  
+              <th colSpan="3">Games</th>
+              <th rowSpan="2"><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
+              <th rowSpan="2"><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
+              <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
+              <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
+              <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
+          </tr>
+          <tr>
+              <th>Total</th>  
+              <th>Start</th>  
+              <th>Sub</th>    
           </tr>
         </thead>
         <tbody>
           {players.map((player) => (
             <tr key={player.id}>
-              <td>{player.number}</td>
-              <td>
+              <td className='num'>{player.number}</td>
+              <td className='text'>
                 <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubId}/players/${player.id}`}>
                   {player.name}
                 </Link>
               </td>
               <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.games}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.starterGames}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.substituteGames}</td>
               <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.goals}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.assists}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.minutes}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.yellowCards}</td>
+              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.redCards}</td>
             </tr>
           ))}
         </tbody>
@@ -128,11 +149,12 @@ function PlayersPage() {
         <input
             type="number"
             name="number"
-            placeholder="Number"
+            placeholder="No."
             value={number}
             onChange={handleInputChange}
             required
             ref={numberInputRef}
+            style={{ width: '40px' }}
         />
         <input
           type="text"

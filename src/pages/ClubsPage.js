@@ -116,17 +116,21 @@ function ClubsPage() {
       <br /> {/* 改行 */}
       {/* LeaguePageに戻るリンク */}
       <Link to={`/countries/${countryId}/leagues`}>Back to Leagues</Link>
-      {/* リーグ名を表示 */}
-      {league && <h1>{league.name} Clubs</h1>} {/* リーグ名を表示する要素を追加 */}
+
+      <br /><br />
+      
       {/* 3つの表示切替ボタン */}
-      <button onClick={switchToClubsList} disabled={isClubsListView}>Clubs</button>
-      <button onClick={switchToStanding} disabled={isStaidingView}>Standing</button>
-      <button onClick={switchToGameResults} disabled={isGameResultsView}>Game Results</button>
-      <br /> {/* 改行 */}
+      <span className='button-container'>
+        <button onClick={switchToClubsList} disabled={isClubsListView}>Clubs</button>
+        <button onClick={switchToStanding} disabled={isStaidingView}>Standing</button>
+        <button onClick={switchToGameResults} disabled={isGameResultsView}>Game Results</button>
+      </span>
 
       {/* クラブ一覧の表示 */}
       {isClubsListView && (
         <>
+          {/* リーグ名を表示 */}
+          {league && <h1>{league.name} Clubs</h1>} {/* リーグ名を表示する要素を追加 */}
           {/* クラブ一覧 */}
           <ul>
             {clubs.map((club) => (
@@ -154,6 +158,8 @@ function ClubsPage() {
       {/* 順位表の表示 */}
       {isStaidingView && (
         <>
+          {/* リーグ名を表示 */}
+          {league && <h1>{league.name} Staning</h1>} {/* リーグ名を表示する要素を追加 */}
           <label htmlFor="season-select">Choose a season:</label>
             <select id="season-select" value={selectedSeason?.id || ''} onChange={handleSeasonChange}>
               {seasons.map((season) => (
@@ -162,27 +168,28 @@ function ClubsPage() {
                 </option>
               ))}
             </select>
+          <br /><br />
 
           <table>
             <thead>
               <tr>
-                <th>Position</th>
+                <th>Pos.</th>
                 <th>Club</th>
-                <th>Points</th>
-                <th>Games</th>
-                <th>Wins</th>
-                <th>Draws</th>
-                <th>Losses</th>
-                <th>Goals For</th>
-                <th>Goals Against</th>
-                <th>Goal Difference</th>
+                <th>Pts.</th>
+                <th>Gms.</th>
+                <th>Wns.</th>
+                <th>Drw.</th>
+                <th>Lss.</th>
+                <th>G.F.</th>
+                <th>G.A.</th>
+                <th>G.D.</th>
               </tr>
             </thead>
             <tbody>
               {standing.clubForStandings.map((clubForStanding) => (
                 <tr key={clubForStanding.club.id}>
-                  <td>{clubForStanding.position}</td>
-                  <td>
+                  <td className='num'>{clubForStanding.position}</td>
+                  <td className='text'>
                     <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubForStanding.club.id}/players`}>
                       {clubForStanding.club.name}
                     </Link>
@@ -205,10 +212,14 @@ function ClubsPage() {
       {/* 試合結果の表示 */}
       {isGameResultsView && (
         <>
+          {/* リーグ名を表示 */}
+          {league && <h1>{league.name} Game Results</h1>} {/* リーグ名を表示する要素を追加 */}
           {/* 試合結果登録画面へのリンク */}
-          <Link to={`/countries/${countryId}/leagues/${leagueId}/register-game-result`}>Register Game Result</Link>
 
-          <br /> {/* 改行 */}
+          {selectedSeason.current === true && 
+          <Link to={`/countries/${countryId}/leagues/${leagueId}/register-game-result`} style={{fontSize : 'large'}}>Register Game Result</Link>}
+
+          <br /><br />
 
           <label htmlFor="season-select">Choose a season:</label>
           <select id="season-select" value={selectedSeason?.id || ''} onChange={handleSeasonChange}>
@@ -222,7 +233,7 @@ function ClubsPage() {
           {seasonGameResult && seasonGameResult.dayGameResults && seasonGameResult.dayGameResults.length > 0 ? (
             seasonGameResult.dayGameResults.map((dayGameResult) => (
               <div key={dayGameResult.gameDate}>
-                <h2>{dayGameResult.gameDate}</h2>
+                <h3>{dayGameResult.gameDate}</h3>
                 <table>
                   {/* <thead>
                     <tr>
@@ -234,13 +245,13 @@ function ClubsPage() {
                   <tbody>
                     {dayGameResult.gameResults.map((gameResult) => (
                       <tr key={gameResult.id}>
-                        <td>
+                        <td className='home'>
                           <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${gameResult.homeClubId}/players`}>
                             {gameResult.homeClubName}
                           </Link>
                         </td>
-                        <td> {gameResult.homeScore} - {gameResult.awayScore} </td>
-                        <td>
+                        <td className='score-text'> {gameResult.homeScore} - {gameResult.awayScore} </td>
+                        <td className='away'>
                           <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${gameResult.awayClubId}/players`}>
                             {gameResult.awayClubName}
                           </Link>
