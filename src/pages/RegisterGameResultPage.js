@@ -221,9 +221,9 @@ function RegisterGameResultPage() {
                                 <tbody>
                                     {homeClubPlayers.map((player) => (
                                         <tr key={player.id}>
-                                            <td className='num'>{player.number}</td>
+                                            <td className='center'>{player.number}</td>
                                             <td className='text'>{player.name}</td>
-                                            <td className='num'><input type="checkbox" name="starter" onChange={(e) => handleInputChange(e, 'home', player.id, 'starter')}  /></td>
+                                            <td className='center'><input type="checkbox" name="starter" onChange={(e) => handleInputChange(e, 'home', player.id, 'starter')}  /></td>
                                             <td><input type="number" name="goals" onChange={(e) => handleInputChange(e, 'home', player.id, 'goals')} className='stats-input' /></td>
                                             <td><input type="number" name="assists" onChange={(e) => handleInputChange(e, 'home', player.id, 'assists')} className='stats-input' /></td>
                                             <td><input type="number" name="ownGoals" onChange={(e) => handleInputChange(e, 'home', player.id, 'ownGoals')} className='stats-input' /></td>
@@ -261,9 +261,9 @@ function RegisterGameResultPage() {
                                 <tbody>
                                     {awayClubPlayers.map((player) => (
                                         <tr key={player.id}>
-                                            <td className='num'>{player.number}</td>
+                                            <td className='center'>{player.number}</td>
                                             <td className='text'>{player.name}</td>
-                                            <td className='num'><input type="checkbox" name="starter" onChange={(e) => handleInputChange(e, 'away', player.id, 'starter')} /></td>
+                                            <td className='center'><input type="checkbox" name="starter" onChange={(e) => handleInputChange(e, 'away', player.id, 'starter')} /></td>
                                             <td><input type="number" name="goals" onChange={(e) => handleInputChange(e, 'away', player.id, 'goals')} className='stats-input' /></td>
                                             <td><input type="number" name="assists" onChange={(e) => handleInputChange(e, 'away', player.id, 'assists')} className='stats-input' /></td>
                                             <td><input type="number" name="ownGoals" onChange={(e) => handleInputChange(e, 'away', player.id, 'ownGoals')} className='stats-input' /></td>

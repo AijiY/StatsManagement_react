@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useToast } from '../contexts/ToastContext';
 import { getCountries } from '../apis/GetMappings.js';
@@ -7,12 +7,15 @@ function CountriesPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const { showToast } = useToast();
+  const nameInputRef = useRef(null); // 国名入力欄の参照を作成
 
   const [countries, setCountries] = useState([]);
   const [newCountryName, setNewCountryName] = useState(''); // 新規登録用のstate
+  const [isLoading, setIsLoading] = useState(true); // このページは初期ページであり、読み込みに時間がかかるため、読み込み中の状態を管理
 
   useEffect(() => {
-    getCountries(setCountries);
+    getCountries(setCountries)
+      .finally(() => setIsLoading(false));
   }, []);
 
   // フォームの入力値を管理
@@ -24,7 +27,7 @@ function CountriesPage() {
   const handleFormSubmit = (e) => {
     e.preventDefault(); // ページリロードを防ぐ
 
-    fetch('${apiUrl}/country', {
+    fetch(`${apiUrl}/country`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,6 +47,10 @@ function CountriesPage() {
         setNewCountryName(''); // 入力欄をリセット
         // 成功メッセージをトーストで表示
         showToast(`Country '${newCountry.name}' registered successfully!`);
+        // 国名入力欄にフォーカスを移動
+        if (nameInputRef.current) {
+          nameInputRef.current.focus();
+        }
       })
       .catch((error) => {
         alert('Error: ' + error.message);
@@ -56,13 +63,19 @@ function CountriesPage() {
       {/* Homeに戻るリンク */}
       <Link to="/">Home</Link>
       <h1>Countries</h1>
-      <ul>
-        {countries.map((country) => (
-          <li key={country.id}>
-            <Link to={`/countries/${country.id}/leagues`}>{country.name}</Link>
-          </li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : !countries || countries.length === 0 ? (
+        <p>No country data</p>
+      ) : (
+        <ul>
+          {countries.map((country) => (
+            <li key={country.id}>
+              <Link to={`/countries/${country.id}/leagues`}>{country.name}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {/* 新しい国の登録フォーム */}
       <h2>Register New Country</h2>
@@ -73,6 +86,7 @@ function CountriesPage() {
           value={newCountryName}
           onChange={handleInputChange}
           required
+          ref={nameInputRef}
         />
         <button type="submit">Register</button>
       </form>
