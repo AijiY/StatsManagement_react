@@ -37,11 +37,7 @@ function PlayerPage() {
 
     useEffect(() => {
         getPlayer(playerId, setPlayer);
-        getPlayerCareerStats(playerId, setPlayerCareerStats);
-        if (playerCareerStats.length > 1) {
-            setPlayerCareerStatsWithoutTotal(playerCareerStats.slice(0, -1));
-            setPlayerCareerStatsTotal(playerCareerStats[playerCareerStats.length - 1]);
-        }
+        getPlayerCareerStats(playerId, setPlayerCareerStats, setPlayerCareerStatsWithoutTotal, setPlayerCareerStatsTotal);
     }, [playerId]);
 
     useEffect(() => {
@@ -193,7 +189,7 @@ function PlayerPage() {
                 <div>
                     {/* 選手名 */}
                     {player && <h1>{player.name} Career Stats</h1>}
-                    {!playerCareerStats || playerCareerStats.length === 1 ? (
+                    {!playerCareerStats || playerCareerStatsTotal.games === 0 ? (
                         <p>No games played in career.</p>
                     ) : (
                         <table>
