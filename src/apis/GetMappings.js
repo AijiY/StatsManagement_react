@@ -225,7 +225,7 @@ export const getCurrentSeason = async (setCurrentSeason) => {
     }
   }
   
-  export const getPlayerCareerStats = async (playerId, setPlayerCareerStats) => {
+  export const getPlayerCareerStats = async (playerId, setPlayerCareerStats, setPlayerCareerStatsWithoutTotal, setPlayerCareerStatsTotal) => {
     try {
         const response = await fetch(`${apiUrl}/players/${playerId}/player-career-stats`);
         if (!response.ok) {
@@ -234,6 +234,8 @@ export const getCurrentSeason = async (setCurrentSeason) => {
         }
         const data = await response.json();
         setPlayerCareerStats(data);
+        setPlayerCareerStatsWithoutTotal(data.slice(0, -1));
+        setPlayerCareerStatsTotal(data[data.length - 1]);
     } catch (error) {
         alert('Error: ' + error.message);
         console.error(error);
