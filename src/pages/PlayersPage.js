@@ -103,45 +103,49 @@ function PlayersPage() {
       <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs`}>Back to Clubs</Link>
       {/* クラブ名を表示 */}
       {club && <h1>{club.name} Players</h1>} {/* クラブ名を表示する要素を追加 */}
-      <table>
-        <thead>
-          <tr>
-              <th rowSpan="2">No.</th>   
-              <th rowSpan="2">Name</th>  
-              <th colSpan="3">Games</th>
-              <th rowSpan="2"><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
-              <th rowSpan="2"><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
-              <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
-              <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
-              <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
-          </tr>
-          <tr>
-              <th>Total</th>  
-              <th>Start</th>  
-              <th>Sub</th>    
-          </tr>
-        </thead>
-        <tbody>
-          {players.map((player) => (
-            <tr key={player.id}>
-              <td className='num'>{player.number}</td>
-              <td className='text'>
-                <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubId}/players/${player.id}`}>
-                  {player.name}
-                </Link>
-              </td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.games}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.starterGames}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.substituteGames}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.goals}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.assists}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.minutes}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.yellowCards}</td>
-              <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.redCards}</td>
+      {!players || players.length === 0 ? (
+        <p>No players registered</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+                <th rowSpan="2">No.</th>   
+                <th rowSpan="2">Name</th>  
+                <th colSpan="3">Games</th>
+                <th rowSpan="2"><img src={goalsIcon} alt="Goals" className='icon-large' /></th>
+                <th rowSpan="2"><img src={assistsIcon} alt="Assists" className='icon-large' /></th>
+                <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
+                <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
+                <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            <tr>
+                <th>Total</th>  
+                <th>Start</th>  
+                <th>Sub</th>    
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((player) => (
+              <tr key={player.id}>
+                <td className='center'>{player.number}</td>
+                <td className='text'>
+                  <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubId}/players/${player.id}`}>
+                    {player.name}
+                  </Link>
+                </td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.games}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.starterGames}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.substituteGames}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.goals}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.assists}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.minutes}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.yellowCards}</td>
+                <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.redCards}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       {/* 新しい選手の登録フォーム */}
       <h2>Register New Player</h2>

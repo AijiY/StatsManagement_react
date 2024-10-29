@@ -45,7 +45,7 @@ td {
   min-width: 50px; 
 }
 
-.num {
+.center {
   text-align: center; /* 背番号、順位等は中央揃え */
 }
 
@@ -118,4 +118,7 @@ td {
   width: 50px;
 }
 
-
+/* PlayerPage */
+.total-row {
+  border-top: 2px solid black; /* 上の線を太く */
+}

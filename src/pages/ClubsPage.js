@@ -101,7 +101,9 @@ function ClubsPage() {
         setClubs([...clubs, newClub]); // 新しいクラブをリストに追加
         setNewClubName(''); // 入力欄をリセット
         showToast(`Club '${newClub.name}' registered successfully!`);
-        nameInputRef.current.focus(); // クラブ名入力欄にフォーカスを移動
+        if (nameInputRef.current) {
+          nameInputRef.current.focus(); // クラブ名入力欄にフォーカス
+        }
       })
       .catch((error) => {
         alert('Error: ' + error.message);
@@ -132,13 +134,17 @@ function ClubsPage() {
           {/* リーグ名を表示 */}
           {league && <h1>{league.name} Clubs</h1>} {/* リーグ名を表示する要素を追加 */}
           {/* クラブ一覧 */}
-          <ul>
-            {clubs.map((club) => (
-              <li key={club.id}>
-                <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${club.id}/players`}>{club.name}</Link>
-              </li>
-            ))}
-          </ul>
+          {!clubs || clubs.length === 0 ? (
+            <p>No clubs data</p>
+          ) : (
+            <ul>
+              {clubs.map((club) => (
+                <li key={club.id}>
+                  <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${club.id}/players`}>{club.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
           {/* 新しいクラブの登録フォーム */}
           <h2>Register New Club</h2>
           <form onSubmit={handleFormSubmit}>
@@ -169,43 +175,46 @@ function ClubsPage() {
               ))}
             </select>
           <br /><br />
-
-          <table>
-            <thead>
-              <tr>
-                <th>Pos.</th>
-                <th>Club</th>
-                <th>Pts.</th>
-                <th>Gms.</th>
-                <th>Wns.</th>
-                <th>Drw.</th>
-                <th>Lss.</th>
-                <th>G.F.</th>
-                <th>G.A.</th>
-                <th>G.D.</th>
-              </tr>
-            </thead>
-            <tbody>
-              {standing.clubForStandings.map((clubForStanding) => (
-                <tr key={clubForStanding.club.id}>
-                  <td className='num'>{clubForStanding.position}</td>
-                  <td className='text'>
-                    <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubForStanding.club.id}/players`}>
-                      {clubForStanding.club.name}
-                    </Link>
-                  </td>
-                  <td>{clubForStanding.points}</td>
-                  <td>{clubForStanding.gamesPlayed}</td>
-                  <td>{clubForStanding.wins}</td>
-                  <td>{clubForStanding.draws}</td>
-                  <td>{clubForStanding.losses}</td>
-                  <td>{clubForStanding.goalsFor}</td>
-                  <td>{clubForStanding.goalsAgainst}</td>
-                  <td>{clubForStanding.goalDifference}</td>
+          {!standing || standing.clubForStandings.length === 0 ? (
+            <p>No standing data (No games played)</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Pos.</th>
+                  <th>Club</th>
+                  <th>Pts.</th>
+                  <th>Gms.</th>
+                  <th>Wns.</th>
+                  <th>Drw.</th>
+                  <th>Lss.</th>
+                  <th>G.F.</th>
+                  <th>G.A.</th>
+                  <th>G.D.</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {standing.clubForStandings.map((clubForStanding) => (
+                  <tr key={clubForStanding.club.id}>
+                    <td className='center'>{clubForStanding.position}</td>
+                    <td className='text'>
+                      <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubForStanding.club.id}/players`}>
+                        {clubForStanding.club.name}
+                      </Link>
+                    </td>
+                    <td>{clubForStanding.points}</td>
+                    <td>{clubForStanding.gamesPlayed}</td>
+                    <td>{clubForStanding.wins}</td>
+                    <td>{clubForStanding.draws}</td>
+                    <td>{clubForStanding.losses}</td>
+                    <td>{clubForStanding.goalsFor}</td>
+                    <td>{clubForStanding.goalsAgainst}</td>
+                    <td>{clubForStanding.goalDifference}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </>
       )}
 
@@ -230,7 +239,9 @@ function ClubsPage() {
             ))}
           </select>
           
-          {seasonGameResult && seasonGameResult.dayGameResults && seasonGameResult.dayGameResults.length > 0 ? (
+          {!seasonGameResult || !seasonGameResult.dayGameResults || seasonGameResult.dayGameResults.length === 0 ? (
+            <p>No game result data</p>
+          ) : (
             seasonGameResult.dayGameResults.map((dayGameResult) => (
               <div key={dayGameResult.gameDate}>
                 <h3>{dayGameResult.gameDate}</h3>
@@ -262,8 +273,6 @@ function ClubsPage() {
                 </table>
               </div>
             ))
-          ) : (
-            <p>No game results</p>
           )}
         </>
       )}

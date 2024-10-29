@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useToast } from '../contexts/ToastContext';
 import { getCountry, getLeaguesByCountry } from '../apis/GetMappings';
@@ -7,6 +7,7 @@ function LeaguesPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
   
   const { showToast } = useToast();
+  const nameInputRef  = useRef(null); // リーグ名入力欄の参照を作成
 
   const { countryId } = useParams(); // URLから国IDを取得
   const [leagues, setLeagues] = useState([]);
@@ -50,6 +51,9 @@ function LeaguesPage() {
           setLeagues([...leagues, newLeague]); // 新しいリーグをリストに追加
           setNewLeagueName(''); // 入力欄をリセット
           showToast(`League '${newLeague.name}' registered successfully!`);
+          if (nameInputRef.current) {
+            nameInputRef.current.focus();
+          }
         })
         .catch((error) => {
           alert('Error: ' + error.message);
@@ -66,13 +70,17 @@ function LeaguesPage() {
       <Link to="/countries">Back to Countries</Link>
       {/* 国名を表示 */}
       {country && <h1>{country.name} Leagues</h1>} {/* 国名を表示する要素を追加 */}
-      <ul>
-        {leagues.map((league) => (
-          <li key={league.id}>
-            <Link to={`/countries/${countryId}/leagues/${league.id}/clubs`}>{league.name}</Link>
-          </li>
-        ))}
-      </ul>
+      {!leagues || leagues.length === 0 ? (
+        <p>No league data</p>
+      ) : (
+        <ul>
+          {leagues.map((league) => (
+            <li key={league.id}>
+              <Link to={`/countries/${countryId}/leagues/${league.id}/clubs`}>{league.name}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {/* 新しいリーグの登録フォーム */}
       <h2>Register New League</h2>
@@ -83,6 +91,7 @@ function LeaguesPage() {
           value={newLeagueName}
           onChange={handleInputChange}
           required
+          ref={nameInputRef} // リーグ名入力欄の参照を設定
         />
         <button type="submit">Register</button>
       </form>
