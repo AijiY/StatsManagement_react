@@ -221,11 +221,15 @@ function ClubsPage() {
       {/* 試合結果の表示 */}
       {isGameResultsView && (
         <>
-          {/* リーグ名を表示 */}
-          {league && <h1>{league.name} Game Results</h1>} {/* リーグ名を表示する要素を追加 */}
+          {/* リーグ名を表示：リダイレクト時のエラー解消のため分岐をつぃいか */}
+          {league ? (
+            <h1>{league.name} Game Results</h1>
+          ) : (
+            <p>Loading league information...</p>
+          )}
           {/* 試合結果登録画面へのリンク */}
 
-          {selectedSeason.current === true && 
+          {selectedSeason && selectedSeason.current === true && 
           <Link to={`/countries/${countryId}/leagues/${leagueId}/register-game-result`} style={{fontSize : 'large'}}>Register Game Result</Link>}
 
           <br /><br />
