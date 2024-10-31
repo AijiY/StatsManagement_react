@@ -22,7 +22,7 @@
 - **検索** ：上記の基本データおよび子順位表や個人成績などを検索できます。
 
 ## ページ遷移図（Page Transition Diagram）
-![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/08815c38-5f97-41a1-b6ad-855fc1b904b2)
+![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/79ddf1d1-b271-47e1-b124-5e116efc6c78)
 
 ## 工夫した点 (Points to Note)
 - **登録後の挙動**<br>
