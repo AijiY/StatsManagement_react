@@ -3,8 +3,9 @@ name: Deploy to S3
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ] 
+  # 以下はCI実装まで不要
+  # pull_request:
+  # branches: [ "main" ] 
 
 jobs:
   deploy:
