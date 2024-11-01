@@ -1,11 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy to S3
 
 on:
   push:
     branches: [ "main" ]
-  # 以下はCI実装まで不要
-  # pull_request:
-  # branches: [ "main" ] 
+  pull_request:
+    branches: [ "main" ] 
 
 
 jobs:
@@ -30,20 +29,20 @@ jobs:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.CLASSIC_TOKEN }}
-          publish_dir: ./build
-          publish_branch: gh-pages
-
-      # - name: Sync files to S3
-      #   uses: jakejarvis/s3-sync-action@master
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     args: --follow-symlinks --delete  # 公開アクセスの設定と削除オプション
-      #   env:
-      #     AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # S3バケット名をGitHub Secretsに設定
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # アクセスキー
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # シークレットキー
-      #     SOURCE_DIR: './build'  # アップロードするディレクトリ
+      #     github_token: ${{ secrets.CLASSIC_TOKEN }}
+      #     publish_dir: ./build
+      #     publish_branch: gh-pages
+
+      - name: Sync files to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete  # 公開アクセスの設定と削除オプション
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # S3バケット名をGitHub Secretsに設定
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # アクセスキー
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # シークレットキー
+          SOURCE_DIR: './build'  # アップロードするディレクトリ
 
