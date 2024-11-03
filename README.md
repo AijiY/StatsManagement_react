@@ -23,13 +23,13 @@
 
 ## デモ動画（Demo Movie）
 - **リーグ所属クラブ一覧の検索**<br>
-<img src="https://github.com/user-attachments/assets/769fb2d8-97c5-46fd-ad03-01c5e3a567d1" width="200%" />
+<img src="https://github.com/user-attachments/assets/769fb2d8-97c5-46fd-ad03-01c5e3a567d1" width="150%" />
 - **選手の検索**<br>
-<img src="https://github.com/user-attachments/assets/42ffba2c-ebfb-427b-962e-956838b4c580" width="200%" />
+<img src="https://github.com/user-attachments/assets/42ffba2c-ebfb-427b-962e-956838b4c580" width="150%" />
 - **選手の登録**<br>
-<img src="https://github.com/user-attachments/assets/10c044ff-e2d9-4fd1-bdb4-cb41f24f058b" width="200%" />
+<img src="https://github.com/user-attachments/assets/10c044ff-e2d9-4fd1-bdb4-cb41f24f058b" width="150%" />
 - **試合結果の登録**<br>
-<img src="https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd" width="200%" />
+<img src="https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd" width="150%" />
 
 ## ページ遷移図（Page Transition Diagram）
 ![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/79ddf1d1-b271-47e1-b124-5e116efc6c78)
