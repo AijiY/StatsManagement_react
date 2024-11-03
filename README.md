@@ -22,14 +22,14 @@
 - **検索** ：上記の基本データおよび子順位表や個人成績などを検索できます。
 
 ## デモ動画（Demo Movie）
-- **リーグ所属クラブ一覧の検索**
-![seach-clubs](https://github.com/user-attachments/assets/769fb2d8-97c5-46fd-ad03-01c5e3a567d1)
-- **選手の検索**
-![search_player](https://github.com/user-attachments/assets/42ffba2c-ebfb-427b-962e-956838b4c580)
-- **選手の登録**
-![register-players](https://github.com/user-attachments/assets/10c044ff-e2d9-4fd1-bdb4-cb41f24f058b)
-- **試合結果の登録**
-![register-game-result](https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd)
+- **リーグ所属クラブ一覧の検索**<br>
+<img src="https://github.com/user-attachments/assets/769fb2d8-97c5-46fd-ad03-01c5e3a567d1" width="200%" />
+- **選手の検索**<br>
+<img src="https://github.com/user-attachments/assets/42ffba2c-ebfb-427b-962e-956838b4c580" width="200%" />
+- **選手の登録**<br>
+<img src="https://github.com/user-attachments/assets/10c044ff-e2d9-4fd1-bdb4-cb41f24f058b" width="200%" />
+- **試合結果の登録**<br>
+<img src="https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd" width="200%" />
 
 ## ページ遷移図（Page Transition Diagram）
 ![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/79ddf1d1-b271-47e1-b124-5e116efc6c78)
