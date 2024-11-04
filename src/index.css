@@ -118,6 +118,11 @@ td {
   width: 50px;
 }
 
+.consecutive-paragraphs {
+  line-height: 1.2; /* 行間を狭くするための設定 */
+    margin: 0; /* pタグのデフォルトのマージンをリセット */
+}
+
 /* PlayerPage */
 .total-row {
   border-top: 2px solid black; /* 上の線を太く */

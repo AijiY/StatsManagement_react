@@ -200,6 +200,16 @@ function RegisterGameResultPage() {
                 </div>            
                 <br /> {/* 改行 */}
 
+                {/* minutesに関する注意書き */}
+                {homeClubId && awayClubId && (
+                    <div>
+                        <p className='consecutive-paragraphs'>※If a substitute player enters the game after 90 minutes,</p>
+                        <p className='consecutive-paragraphs'>・For players who were substituted off, calculate their playing time assuming they finished at 90 minutes.</p>
+                        <p className='consecutive-paragraphs'>・For substitute players entering the game, record their playing time as 1 minute.</p>
+                        <br /> {/* 改行 */}
+                    </div>
+                )}
+
                 <div id='stats-container'>
                     {/* ホームクラブの選手一覧：ホームクラブが選択されると表示される */}
                     {homeClub && (
