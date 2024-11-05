@@ -26,7 +26,9 @@ jobs:
         env:
           CI: false
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        run: npm run build
+        run: |
+          rm -rf build/
+          npm run build
 
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
