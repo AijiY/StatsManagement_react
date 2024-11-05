@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useToast } from '../contexts/ToastContext';
 import { getClub, getCurrentSeason, getPlayersByClub, getPlayersSeasonStatsByClub } from '../apis/GetMappings.js';
 
@@ -13,6 +13,7 @@ function PlayersPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
   
   const { showToast } = useToast();
+  const navigate = useNavigate();
   const numberInputRef = useRef(null); // 背番号入力欄の参照を作成
 
   const { countryId } = useParams(); // URLから国IDを取得
@@ -117,6 +118,9 @@ function PlayersPage() {
                 <th rowSpan="2"><img src={minutesIcon} alt="Minutes" className='icon-large' /></th>
                 <th rowSpan="2"><img src={yellowCardsIcon} alt="Yellow Cards" className='icon-large' /></th>
                 <th rowSpan="2"><img src={redCardsIcon} alt="Red Cards" className='icon-large' /></th>
+                <th rowSpan="2">Update<br />Name/No.</th>
+                <th rowSpan="2">Transfer</th>
+                <th rowSpan="2">MakeFree</th>
             </tr>
             <tr>
                 <th>Total</th>  
@@ -141,6 +145,15 @@ function PlayersPage() {
                 <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.minutes}</td>
                 <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.yellowCards}</td>
                 <td>{playerSeasonStats.find((stats) => stats.playerId === player.id)?.redCards}</td>
+                <td className='center'>
+                  <button onClick={() => navigate(`/patch-player/${player.id}`)}>Go</button>
+                </td>
+                <td className='center'>
+                  <button onClick={() => navigate(`/transfer-player/${player.id}`)}>Go</button>
+                </td>
+                <td className='center'>
+                  <button onClick={() => navigate(`/make-player-free/${player.id}`)}>Go</button>
+                </td>                
               </tr>
             ))}
           </tbody>
