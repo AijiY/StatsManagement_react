@@ -13,8 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          # 最新のコミットをcheckoutする
-          ref: ${{ github.sha }}
+          ref: ${{ github.ref }}  # ブランチ名を取得
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -32,13 +31,6 @@ jobs:
         run: |
           rm -rf build/
           npm run build
-
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.CLASSIC_TOKEN }}
-      #     publish_dir: ./build
-      #     publish_branch: gh-pages
 
       - name: Sync files to S3
         uses: jakejarvis/s3-sync-action@master
