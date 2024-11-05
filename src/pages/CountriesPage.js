@@ -74,6 +74,7 @@ function CountriesPage() {
               <Link to={`/countries/${country.id}/leagues`}>{country.name}</Link>
             </li>
           ))}
+          <li><Link to="/countries/0/leagues/0/clubs/0/players">その他</Link></li>
         </ul>
       )}
 

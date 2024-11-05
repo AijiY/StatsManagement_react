@@ -36,7 +36,7 @@
 ![register-game-result](https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd)
 
 ## ページ遷移図（Page Transition Diagram）
-![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/79ddf1d1-b271-47e1-b124-5e116efc6c78)
+![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/e0137d49-8130-40c0-9817-24a87c9ebb2d)
 
 ## 工夫した点 (Points to Note)
 - **登録後の挙動**<br>

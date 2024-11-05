@@ -179,6 +179,21 @@ export const getCurrentSeason = async (setCurrentSeason) => {
         console.error(error);
     }
   }
+
+  export const getPlayersWithNoClub = async (setPlayers) => {
+    try {
+        const response = await fetch(`${apiUrl}/clubs/null/players`);
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text);
+        }
+        const data = await response.json();
+        setPlayers(data);
+    } catch (error) {
+        alert('Error: ' + error.message);
+        console.error(error);
+    }
+  }
   
   export const getPlayerGameStats = async (playerId, seasonId , setPlayerGameStats) => {
     try {
