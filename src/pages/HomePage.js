@@ -28,7 +28,7 @@ function HomePage() {
                 <li><strong>更新</strong>：選手情報の更新（名前、背番号の変更およびクラブの移籍）ができます。</li>
             </ul>
 
-            <h2>GitHubリポジトリ（GitHub Repository）</h2>
+            <h2>GitHubリポジトリ（Repository）</h2>
             <p>下記のリンクから、このシステムのリポジトリを確認できます。</p>
             <ul>
                 <li><a href="https://github.com/AijiY/FootballStatsManagement" target='_blank'>Webアプリケーション</a></li>
