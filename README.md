@@ -37,7 +37,7 @@
 ![register-game-result](https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd)
 
 ## ページ遷移図（Page Transition Diagram）
-![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/67af393f-18e3-42c5-b7b4-818c7ec0cd76)
+![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/7651e17b-642b-434d-b710-ff7d8d2ec3f4)
 
 ## 工夫した点 (Points to Note)
 - **登録後の挙動**<br>
@@ -51,3 +51,6 @@ APIから取得したデータを用いてページ作成する際に、nullチ�
 
 ## AWS構成（AWS Configuration）
 ※作成中
+
+## License
+This project is built with [Create React App](https://create-react-app.dev/) and is licensed under the [MIT License](LICENSE).
