@@ -1,5 +1,5 @@
 {
-  "name": "stats_management_react",
+  "name": "StatsManagement_react",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
@@ -22,8 +22,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "StatsManagement_react",
-      "StatsManagement_react/jest"
+      "react-app",
+      "react-app/jest"
     ]
   },
   "browserslist": {
