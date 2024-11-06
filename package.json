@@ -1,7 +1,8 @@
 {
-  "name": "react-app",
+  "name": "stats_management_react",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -21,8 +22,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "StatsManagement_react",
+      "StatsManagement_react/jest"
     ]
   },
   "browserslist": {
@@ -39,5 +40,12 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AijiY/StatsManagement_react"
+  },
+  "author": {
+    "name": "AijiY(https://github.com/AijiY)"
   }
 }
