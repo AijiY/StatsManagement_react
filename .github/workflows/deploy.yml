@@ -38,7 +38,7 @@ jobs:
       - name: Sync files to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --follow-symlinks --delete  # 公開アクセスの設定と削除オプション
+          args: --follow-symlinks --delete --cache-control "no-cache,no-store,must-revalidate" # 公開アクセスの設定と削除オプション＋キャッシュの無効化
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  # S3バケット名をGitHub Secretsに設定
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # アクセスキー
