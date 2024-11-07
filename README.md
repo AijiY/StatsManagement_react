@@ -50,7 +50,7 @@ APIから取得したデータを用いてページ作成する際に、nullチ�
 - **テスト実施** ：フロントエンドテストまたはE2Eテストの実施による品質の担保
 
 ## AWS構成（AWS Configuration）
-※作成中
+![AWS drawio_ClientPage](https://github.com/user-attachments/assets/0a81adce-1a08-4cb8-86c9-ef3d65585578)
 
 ## License
 This project is built with [Create React App](https://create-react-app.dev/) and is licensed under the [MIT License](LICENSE).
