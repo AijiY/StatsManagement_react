@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getSeasons, getCurrentSeason, getPlayer, getPlayerCareerStats, getPlayerSeasonStats} from '../apis/GetMappings';
+import { getSeasons, getCurrentSeason, getPlayer, getPlayerCareerStat, getPlayerSeasonStats} from '../apis/GetMappings';
 import { getGameResult, getClub } from './../apis/GetMappings';
 
 import goalsIcon from '../assets/images/goals.png';
@@ -19,9 +19,7 @@ function PlayerPage() {
     const { playerId } = useParams(); // URLから選手IDを取得
     const [player, setPlayer] = useState([]);
     const [playerSeasonStats, setPlayerSeasonStats] = useState([]); // 選手のシーズン成績を管理するstate
-    const [playerCareerStats, setPlayerCareerStats] = useState([]); // 選手の通算成績を管理するstate
-    const [playerCareerStatsWithoutTotal, setPlayerCareerStatsWithoutTotal] = useState([]); // 選手の通算成績を管理するstate
-    const [playerCareerStatsTotal, setPlayerCareerStatsTotal] = useState([]); // 選手の通算成績を管理するstate
+    const [playerCareerStat, setPlayerCareerStat] = useState([]); // 選手の通算成績を管理するstate
     const [seasons, setSeasons] = useState([]); // シーズン一覧を管理するstate
     const [selectedSeason, setSelectedSeason] = useState(null); // 選択中のシーズンを管理するstate
     const [isSeasonStatsView, setIsSeasonStatsView] = useState(true); // シーズン成績表示切り替え用のstate
@@ -37,7 +35,7 @@ function PlayerPage() {
 
     useEffect(() => {
         getPlayer(playerId, setPlayer);
-        getPlayerCareerStats(playerId, setPlayerCareerStats, setPlayerCareerStatsWithoutTotal, setPlayerCareerStatsTotal);
+        getPlayerCareerStat(playerId, setPlayerCareerStat);
     }, [playerId]);
 
     useEffect(() => {
@@ -189,7 +187,7 @@ function PlayerPage() {
                 <div>
                     {/* 選手名 */}
                     {player && <h1>{player.name} Career Stats</h1>}
-                    {!playerCareerStats || playerCareerStatsTotal.games === 0 ? (
+                    {!playerCareerStat || playerCareerStat.playerTotalStat.games === 0 ? (
                         <p>No games played in career.</p>
                     ) : (
                         <table>
@@ -211,7 +209,7 @@ function PlayerPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {playerCareerStatsWithoutTotal.map((playerSeasonStat) => (
+                                {playerCareerStat.playerSeasonStats.map((playerSeasonStat) => (
                                     <tr key={playerSeasonStat.seasonId}>
                                         <td>{playerSeasonStat.seasonName}</td>
                                         <td>{playerSeasonStat.clubName}</td>
@@ -225,16 +223,16 @@ function PlayerPage() {
                                         <td>{playerSeasonStat.redCards}</td>
                                     </tr>
                                 ))}
-                                <tr key={playerCareerStatsTotal.seasonId} className="total-row">
+                                <tr className="total-row">
                                     <td colSpan={"2"} className='center'>Total</td>
-                                    <td>{playerCareerStatsTotal.games}</td>
-                                    <td>{playerCareerStatsTotal.starterGames}</td>
-                                    <td>{playerCareerStatsTotal.substituteGames}</td>
-                                    <td>{playerCareerStatsTotal.goals}</td>
-                                    <td>{playerCareerStatsTotal.assists}</td>
-                                    <td>{playerCareerStatsTotal.minutes}</td>
-                                    <td>{playerCareerStatsTotal.yellowCards}</td>
-                                    <td>{playerCareerStatsTotal.redCards}</td>
+                                    <td>{playerCareerStat.playerTotalStat.games}</td>
+                                    <td>{playerCareerStat.playerTotalStat.starterGames}</td>
+                                    <td>{playerCareerStat.playerTotalStat.substituteGames}</td>
+                                    <td>{playerCareerStat.playerTotalStat.goals}</td>
+                                    <td>{playerCareerStat.playerTotalStat.assists}</td>
+                                    <td>{playerCareerStat.playerTotalStat.minutes}</td>
+                                    <td>{playerCareerStat.playerTotalStat.yellowCards}</td>
+                                    <td>{playerCareerStat.playerTotalStat.redCards}</td>
                                 </tr>
                             </tbody>
                         </table>

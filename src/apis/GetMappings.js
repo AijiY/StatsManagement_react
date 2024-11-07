@@ -240,17 +240,15 @@ export const getCurrentSeason = async (setCurrentSeason) => {
     }
   }
   
-  export const getPlayerCareerStats = async (playerId, setPlayerCareerStats, setPlayerCareerStatsWithoutTotal, setPlayerCareerStatsTotal) => {
+  export const getPlayerCareerStat = async (playerId, setPlayerCareerStat) => {
     try {
-        const response = await fetch(`${apiUrl}/players/${playerId}/player-career-stats`);
+        const response = await fetch(`${apiUrl}/players/${playerId}/player-career-stat`);
         if (!response.ok) {
             const text = await response.text();
             throw new Error(text);
         }
         const data = await response.json();
-        setPlayerCareerStats(data);
-        setPlayerCareerStatsWithoutTotal(data.slice(0, -1));
-        setPlayerCareerStatsTotal(data[data.length - 1]);
+        setPlayerCareerStat(data);
     } catch (error) {
         alert('Error: ' + error.message);
         console.error(error);
