@@ -97,13 +97,13 @@ td {
 #club-info-container {
   display: flex;
   justify-content: space-around;
-  gap: 20px; /* スマホ向けに設定（PCではspace-evenlyで決まるため無効） */
+  gap: 30px; /* スマホ向けに設定（PCではspace-evenlyで決まるため無効） */
 }
 
 .each-club-info-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 .center-container {
