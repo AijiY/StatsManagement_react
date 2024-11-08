@@ -91,6 +91,7 @@ td {
 #stats-container {
   display: flex;
   justify-content: space-evenly;
+  gap: 10px; /* スマホ向けに設定（PCではspace-evenlyで決まるため無効） */
 }
 
 #club-info-container {
@@ -101,13 +102,13 @@ td {
 .each-club-info-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 15px;
 }
 
 .center-container {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 }
 
 .stats-input {
