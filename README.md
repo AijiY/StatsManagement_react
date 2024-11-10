@@ -49,8 +49,15 @@ APIから取得したデータを用いてページ作成する際に、nullチ�
 - **更新機能** ：クラブ情報の更新ページの追加
 - **テスト実施** ：フロントエンドテストまたはE2Eテストの実施による品質の担保
 
+## 反省点 (Reflection Points)
+- **フレームワーク選択検討**<br>
+  作業前に、使用するフレームワークについてより詳細に検討すべきでした（Vue.js等）。CSSクラスを複数のページで共通して利用する場面も多くその点ではReactに軍配が上がると思いますが、この程度の小規模のサイトであればVue.jsの方がコードがより簡潔になった可能性が高いと考えます。
+
+- **作業環境**<br>
+  初期段階では、Webアプリのプロジェクトフォルダ内にこのクライアントページのプロジェクトを配置し、Webアプリの実行時にCREATE REACT APPもビルドされるような設定としていました。しかし、現在のようにWebアプリとクライアントページのプロジェクトを分けて、それぞれ別に実行する方が利便性は高く、初期段階からこの環境で開発するのが望ましかったと考えています。
+
 ## AWS構成（AWS Configuration）
-![AWS drawio_ClientPage](https://github.com/user-attachments/assets/0a81adce-1a08-4cb8-86c9-ef3d65585578)
+![AWS drawio_ClientPage](https://github.com/user-attachments/assets/c34b5e42-da0b-48be-a00f-1186d5ca0754)
 
 ## License
 This project is built with [Create React App](https://create-react-app.dev/) and is licensed under the [MIT License](LICENSE).
