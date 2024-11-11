@@ -15,6 +15,7 @@
 ### ツール（Tools）
 ![badge](https://img.shields.io/badge/Visual%20Studio%20Code-1.95.0-007ACC.svg?logo=visual-studio-code&style=flat)
 ![badge](https://img.shields.io/badge/-Create%20React%20App-555.svg?logo=react&style=flat)
+![badge](https://img.shields.io/badge/-Tailwind%20CSS-555.svg?logo=tailwindcss&style=flat)
 ![badge](https://img.shields.io/badge/GitHub-%23181717?logo=github&logoColor=white)
 ![badge](https://img.shields.io/badge/GitHub_Actions-%232088FF?logo=githubactions&logoColor=white)
 ![badge](https://img.shields.io/badge/draw.io-FB9D3A.svg?logo=diagramsdotnet&logoColor=white)
