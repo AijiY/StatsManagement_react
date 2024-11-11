@@ -119,6 +119,21 @@ export const getCurrentSeason = async (setCurrentSeason) => {
         console.error(error);
     }
   }
+
+  export const getLeagueRegulationByLeague = async (leagueId, setLeagueRegulation) => {
+    try {
+        const response = await fetch(`${apiUrl}/league-regulations/${leagueId}`);
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text);
+        }
+        const data = await response.json();
+        setLeagueRegulation(data);
+    } catch (error) {
+        alert('Error: ' + error.message);
+        console.error(error);
+    }
+  }
   
   export const getClubsByLeague = async (leagueId, setClubs) => {
     try {
@@ -284,4 +299,3 @@ export const getCurrentSeason = async (setCurrentSeason) => {
         console.error(error);
     }
   }
-  

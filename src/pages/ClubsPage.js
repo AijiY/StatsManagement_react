@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { useToast } from '../contexts/ToastContext';
-import { getClubsByLeague, getCurrentSeason, getLeague, getSeasonGameReslt, getSeasons, getStanding } from '../apis/GetMappings';
+import { getClubsByLeague, getCurrentSeason, getLeague, getLeagueRegulationByLeague, getSeasonGameReslt, getSeasons, getStanding } from '../apis/GetMappings';
 
 function ClubsPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -19,6 +19,8 @@ function ClubsPage() {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [seasonGameResult, setSeasonGameResult] = useState([]);
 
+  const [leagueRegulation, setLeagueRegulation] = useState(''); // リーグ規定を管理するstate
+
   const location = useLocation();
   const initialState = {showClubsList: true, showGameResults: false};
   const navigationsState = location.state || initialState;
@@ -35,6 +37,7 @@ function ClubsPage() {
   useEffect(() => {
     getClubsByLeague(leagueId, setClubs);
     getLeague(leagueId, setLeague);
+    getLeagueRegulationByLeague(leagueId, setLeagueRegulation);
   }, [leagueId]);
 
   useEffect(() => {
@@ -178,42 +181,52 @@ function ClubsPage() {
           {!standing || standing.clubForStandings.length === 0 ? (
             <p>No standing data (No games played)</p>
           ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Pos.</th>
-                  <th>Club</th>
-                  <th>Pts.</th>
-                  <th>Gms.</th>
-                  <th>Wns.</th>
-                  <th>Drw.</th>
-                  <th>Lss.</th>
-                  <th>G.F.</th>
-                  <th>G.A.</th>
-                  <th>G.D.</th>
-                </tr>
-              </thead>
-              <tbody>
-                {standing.clubForStandings.map((clubForStanding) => (
-                  <tr key={clubForStanding.club.id}>
-                    <td className='center'>{clubForStanding.position}</td>
-                    <td className='text'>
-                      <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubForStanding.club.id}/players`}>
-                        {clubForStanding.club.name}
-                      </Link>
-                    </td>
-                    <td>{clubForStanding.points}</td>
-                    <td>{clubForStanding.gamesPlayed}</td>
-                    <td>{clubForStanding.wins}</td>
-                    <td>{clubForStanding.draws}</td>
-                    <td>{clubForStanding.losses}</td>
-                    <td>{clubForStanding.goalsFor}</td>
-                    <td>{clubForStanding.goalsAgainst}</td>
-                    <td>{clubForStanding.goalDifference}</td>
+            <div className="md:flex gap-6">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Pos.</th>
+                    <th>Club</th>
+                    <th>Pts.</th>
+                    <th>Gms.</th>
+                    <th>Wns.</th>
+                    <th>Drw.</th>
+                    <th>Lss.</th>
+                    <th>G.F.</th>
+                    <th>G.A.</th>
+                    <th>G.D.</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {standing.clubForStandings.map((clubForStanding) => (
+                    <tr key={clubForStanding.club.id}>
+                      <td className='center'>{clubForStanding.position}</td>
+                      <td className='text'>
+                        <Link to={`/countries/${countryId}/leagues/${leagueId}/clubs/${clubForStanding.club.id}/players`}>
+                          {clubForStanding.club.name}
+                        </Link>
+                      </td>
+                      <td>{clubForStanding.points}</td>
+                      <td>{clubForStanding.gamesPlayed}</td>
+                      <td>{clubForStanding.wins}</td>
+                      <td>{clubForStanding.draws}</td>
+                      <td>{clubForStanding.losses}</td>
+                      <td>{clubForStanding.goalsFor}</td>
+                      <td>{clubForStanding.goalsAgainst}</td>
+                      <td>{clubForStanding.goalDifference}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div>
+                <p>Positions are determined by the following order:</p>
+                <ol>
+                  {leagueRegulation && leagueRegulation.comparisonItems.map((item) => (
+                    <li key={item.id}>{item.name}</li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           )}
         </>
       )}
