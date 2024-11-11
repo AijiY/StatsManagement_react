@@ -219,7 +219,7 @@ function ClubsPage() {
                 </tbody>
               </table>
               <div>
-                <p>Positions are determined by the following order:</p>
+                <p>※Positions are determined by the following order:</p>
                 <ol>
                   {leagueRegulation && leagueRegulation.comparisonItems.map((item) => (
                     <li key={item.id}>{item.name}</li>
