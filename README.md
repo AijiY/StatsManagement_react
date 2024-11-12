@@ -21,6 +21,7 @@
 ![badge](https://img.shields.io/badge/draw.io-FB9D3A.svg?logo=diagramsdotnet&logoColor=white)
 ![badge](https://img.shields.io/badge/Microsoft%20Clipchamp-007ACC.svg?logo=visual-studio-code&style=flat)
 ![badge](https://img.shields.io/badge/OBS%20Studio-30.2.3-302E31.svg?logo=obsstudio&logoColor=white)
+![badge](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?logo=amazonwebservices&logoColor=white)
 
 ## 機能（Function） 
 - **登録** ：国～選手までの基本データ、および試合結果を登録できます。
@@ -29,16 +30,16 @@
 
 ## デモ動画（Demo Movie）
 - **リーグ所属クラブ一覧の検索**<br>
-![seach-clubs](https://github.com/user-attachments/assets/769fb2d8-97c5-46fd-ad03-01c5e3a567d1)
+![seach-clubs](/docs/gif/seach-clubs.gif)
 - **選手の検索**<br>
-![search_player](https://github.com/user-attachments/assets/42ffba2c-ebfb-427b-962e-956838b4c580)
+![search_player](/docs/gif/search_player.gif)
 - **選手の登録**<br>
-![register-players](https://github.com/user-attachments/assets/10c044ff-e2d9-4fd1-bdb4-cb41f24f058b)
+![register-players](/docs/gif/register-players.gif)
 - **試合結果の登録**<br>
-![register-game-result](https://github.com/user-attachments/assets/23affa95-ea94-4e40-a56b-de67486833dd)
+![register-game-result](/docs/gif/register-game-result.gif)
 
 ## ページ遷移図（Page Transition Diagram）
-![PageTransitionDiagram drawio](https://github.com/user-attachments/assets/7651e17b-642b-434d-b710-ff7d8d2ec3f4)
+![PageTransitionDiagram](/docs/svg/PageTransitionDiagram.svg)
 
 ## 工夫した点 (Points to Note)
 - **登録後の挙動**<br>
@@ -58,7 +59,7 @@ APIから取得したデータを用いてページ作成する際に、nullチ�
   初期段階では、Webアプリのプロジェクトフォルダ内にこのクライアントページのプロジェクトを配置し、Webアプリの実行時にCREATE REACT APPもビルドされるような設定としていました。しかし、現在のようにWebアプリとクライアントページのプロジェクトを分けて、それぞれ別に実行する方が利便性は高く、初期段階からこの環境で開発するのが望ましかったと考えています。
 
 ## AWS構成（AWS Configuration）
-![AWS drawio_ClientPage](https://github.com/user-attachments/assets/c34b5e42-da0b-48be-a00f-1186d5ca0754)
+![AWS_ClientPage](/docs/svg/AWS_ClientPage.svg)
 
 ## License
 This project is built with [Create React App](https://create-react-app.dev/) and is licensed under the [MIT License](LICENSE).
