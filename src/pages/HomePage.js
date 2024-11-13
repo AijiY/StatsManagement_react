@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
     return (
@@ -31,8 +30,8 @@ function HomePage() {
             <h2>GitHubリポジトリ（Repository）</h2>
             <p>下記のリンクから、このシステムのリポジトリを確認できます。</p>
             <ul>
-                <li><a href="https://github.com/AijiY/FootballStatsManagement" target='_blank'>Webアプリケーション</a></li>
-                <li><a href="https://github.com/AijiY/StatsManagement_react" target='_blank'>クライアントページ</a></li>
+                <li><a href="https://github.com/AijiY/FootballStatsManagement" target='_blank' rel="noopener noreferrer">Webアプリケーション</a></li>
+                <li><a href="https://github.com/AijiY/StatsManagement_react" target='_blank' rel="noopener noreferrer">クライアントページ</a></li>
             </ul>
         </div>
     );

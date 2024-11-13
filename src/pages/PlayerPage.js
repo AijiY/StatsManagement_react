@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getSeasons, getCurrentSeason, getPlayer, getPlayerCareerStat, getPlayerSeasonStats} from '../apis/GetMappings';
-import { getGameResult, getClub } from './../apis/GetMappings';
 
 import goalsIcon from '../assets/images/goals.png';
 import assistsIcon from '../assets/images/assists.png';
@@ -11,7 +10,6 @@ import redCardsIcon from '../assets/images/red-cards.png';
 
 
 function PlayerPage() {
-    const apiUrl = process.env.REACT_APP_API_URL;
     
     const { countryId } = useParams(); // URLから国IDを取得
     const { leagueId } = useParams(); // URLからリーグIDを取得
@@ -23,10 +21,6 @@ function PlayerPage() {
     const [seasons, setSeasons] = useState([]); // シーズン一覧を管理するstate
     const [selectedSeason, setSelectedSeason] = useState(null); // 選択中のシーズンを管理するstate
     const [isSeasonStatsView, setIsSeasonStatsView] = useState(true); // シーズン成績表示切り替え用のstate
-    const [gameId, setGameId] = useState(null);
-    const [gameResult, setGameResult] = useState(null);
-    const [opponentClubId, setOpponentClubId] = useState(null);
-    const [opponentClub, setOpponentClub] = useState(null);
 
     useEffect(() => {
         getSeasons(setSeasons);
@@ -43,19 +37,6 @@ function PlayerPage() {
             getPlayerSeasonStats(playerId, selectedSeason.id, setPlayerSeasonStats);
         }
     }, [playerId, selectedSeason]);
-
-    useEffect(() => {
-        if (gameId) {
-            getGameResult(gameId, setGameResult);
-        }
-    }, [gameId]);
-
-    useEffect(() => {
-        if (opponentClubId) {
-            getClub(opponentClubId, setOpponentClub);
-        }
-    }, [opponentClubId]);
-
 
     const handleSeasonChange = (e) => {
         const selectedSeasonId = Number(e.target.value);
@@ -166,7 +147,7 @@ function PlayerPage() {
                                                 <td className='text'>{seasonStat.clubName}</td>
                                                 <td className='text'>{gameStat.opponentClubName}</td>
                                                 <td className='score-text'>{gameStat.score}</td>
-                                                <td className='center'>{gameStat.isStarter ? '〇' : '-'}</td>
+                                                <td className='center'>{gameStat.starter ? '〇' : '-'}</td>
                                                 <td>{gameStat.goals}</td>
                                                 <td>{gameStat.assists}</td>
                                                 <td>{gameStat.minutes}</td>
