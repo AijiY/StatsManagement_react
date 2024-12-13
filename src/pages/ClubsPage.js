@@ -5,7 +5,7 @@ import {
   getClubsByLeague,
   getCurrentSeason,
   getLeague,
-  getLeagueRegulationByLeague,
+  getLeagueRegulationsByLeague,
   getSeasonGameReslt,
   getSeasons,
   getStanding,
@@ -27,7 +27,7 @@ function ClubsPage() {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [seasonGameResult, setSeasonGameResult] = useState([]);
 
-  const [leagueRegulation, setLeagueRegulation] = useState(""); // リーグ規定を管理するstate
+  const [leagueRegulations, setLeagueRegulations] = useState(""); // リーグ規定を管理するstate
 
   const location = useLocation();
   const initialState = { showClubsList: true, showGameResults: false };
@@ -49,7 +49,7 @@ function ClubsPage() {
   useEffect(() => {
     getClubsByLeague(leagueId, setClubs);
     getLeague(leagueId, setLeague);
-    getLeagueRegulationByLeague(leagueId, setLeagueRegulation);
+    getLeagueRegulationsByLeague(leagueId, setLeagueRegulations);
   }, [leagueId]);
 
   useEffect(() => {
@@ -267,9 +267,9 @@ function ClubsPage() {
                 <aside>
                   <p>※Positions are determined by the following order</p>
                   <ol>
-                    {leagueRegulation &&
-                      leagueRegulation.comparisonItems.map((item) => (
-                        <li key={item.id}>{item.name}</li>
+                    {leagueRegulations &&
+                      leagueRegulations.map((item) => (
+                        <li key={item.comparisonItemOrder}>{item.comparisonItemName}</li>
                       ))}
                   </ol>
                 </aside>
