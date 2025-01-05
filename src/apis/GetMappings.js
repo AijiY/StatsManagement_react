@@ -1,4 +1,4 @@
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL; // ローカル開発時はlocalhost、デプロイ時はSecrets参照
 
 export const getCurrentSeason = async (setCurrentSeason) => {
   try {
